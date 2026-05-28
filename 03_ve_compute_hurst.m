@@ -4,8 +4,8 @@ function ve_compute_hurst (patient_id)
 % Input: 
 %      (i) VE for every patient, saved in a folder by the same name as the patient id
 %      (ii) the script uses hurst_mod function written by Rafal Weron (2011.09.30) to compute HE, 
-%      and requires this function to be in the MATLAB path
-%      the script can be downloaded from https://ideas.repec.org/c/wuu/hscode/m11003.html
+%      and requires this function to be in the MATLAB path. 
+%      hurst_mod can be downloaded from https://ideas.repec.org/c/wuu/hscode/m11003.html
 %      (iii) input files (ve time series) should be in .dat format
 % Output: 
 %      HE of every ve time series is saved as a separate .txt file with appended ve number
