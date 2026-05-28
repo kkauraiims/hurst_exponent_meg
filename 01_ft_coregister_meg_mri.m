@@ -23,8 +23,8 @@ function ft_coregister_meg_mri (patient_id)
 % Authors: CW, KK June 2022; updated- Oct, 2022
 
 % Specify patient input and output dirs
-patient_dir = strcat ('/path/to/ patient_id'); 
-patient_output_dir = strcat ('/Path/to/output_dir/patient_id');
+patient_dir = strcat ('/path/to/', patient_id); 
+patient_output_dir = strcat ('/Path/to/output_dir/',patient_id);
 mkdir(patient_output_dir)
 cd (patient_dir)
 
