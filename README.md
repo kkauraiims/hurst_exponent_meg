@@ -13,7 +13,6 @@ Written and maintained by Caroline Witton and [Kirandeep Kaur](https://github.co
 Co-registers Elekta Neuromag MEG data with structural MRI and prepares the geometrical and covariance inputs required for source analysis.
 
 Main outputs:
-
 - preprocessed MEG data covariance matrix
 - head model
 - source model
@@ -26,7 +25,6 @@ Typical runtime: 15–20 minutes per subject.
 Performs LCMV beamformer source analysis using the precomputed head model, source model and covariance matrix, then extracts virtual electrode time series.
 
 Main outputs:
-
 - leadfield matrix
 - LCMV source output
 - virtual electrode time series
@@ -38,9 +36,7 @@ Typical runtime: 45–60 minutes per subject.
 Computes the Hurst exponent for each virtual electrode time series.
 
 Main outputs:
-
 - Hurst exponent values for each virtual electrode
-
 
 ## External dependency
 
