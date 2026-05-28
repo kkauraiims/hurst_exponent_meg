@@ -20,6 +20,7 @@ function ft_coregister_meg_mri (patient_id)
 %     What is the anatomical label for the positive Y-axis [r, l, a, p, s, i]? a
 %     What is the anatomical label for the positive Z-axis [r, l, a, p, s, i]? s
 %     Is the origin of the coordinate system at the a(nterior commissure), i(nterauricular), n(ot a landmark)? i
+%   3. It is important to check the end alignment of the geometric data, misaligned geometry is likely to generate spurious sources
 % Authors: CW, KK June 2022; updated- Oct, 2022
 
 % Specify patient input and output dirs
