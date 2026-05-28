@@ -1,4 +1,4 @@
-function coregister_ft_he_kk (patient_id)
+function ft_coregister_meg_mri (patient_id)
 % This function co-registers Elekta neuromag MEG data with the subject's structural MRI 
 % the code is executed in FieldTrip
 % Input: 
