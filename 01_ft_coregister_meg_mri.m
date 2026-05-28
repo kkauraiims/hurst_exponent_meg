@@ -3,8 +3,9 @@ function ft_coregister_meg_mri (patient_id)
 % the code is executed in FieldTrip
 % Input: 
 %  The function only requires the patient/subject id as input
+%  it is assumed that ft_defaults is already initiated and completed
 %  it is assumed that both the MEG (.fif) and MRI (.mgz) are in the same patient/subject directory
-%  The name of the patient/subject directory is the same as the patient/subject ID
+%  the name of the patient/subject directory is the same as the patient/subject ID
 % Output: 
 %  (The function automatically generates an output directory from the patient/subject_ID)
 %  i. Computes the covariance matrix of the MEG data for creating the downstream leadfield matrix
