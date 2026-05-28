@@ -1,38 +1,47 @@
 function coregister_ft_he_kk (patient_id)
-% A custom function to co-register Elekta MEG data with individual MRI 
-% in fieldtrip for computing Hurst Exponent 
+% This function co-registers Elekta neuromag MEG data with the subject's structural MRI 
+% the code is executed in FieldTrip
+% Input: 
+%  The function only requires the patient/subject id as input
+%  it is assumed that both the MEG (.fif) and MRI (.mgz) are in the same patient/subject directory
+%  The name of the patient/subject directory is the same as the patient/subject ID
+% Output: 
+%  (The function automatically generates an output directory from the patient/subject_ID)
+%  i. Computes the covariance matrix of the MEG data for creating the downstream leadfield matrix
+%  ii. Headmodel 
+%  iii. Sourcemodel 
+%  iv. Figure depicting the alignment of all geometrical data
+% Notes: 
+%   1. currently coded for '.mgz' MRI files only 
+%   2. requires the following manual input: 
+%     Do you want to change the anatomical labels for the axes [Y, n]? y
+%     What is the anatomical label for the positive X-axis [r, l, a, p, s, i]? r
+%     What is the anatomical label for the positive Y-axis [r, l, a, p, s, i]? a
+%     What is the anatomical label for the positive Z-axis [r, l, a, p, s, i]? s
+%     Is the origin of the coordinate system at the a(nterior commissure), i(nterauricular), n(ot a landmark)? i
+% Authors: CW, KK June 2022; updated- Oct, 2022
 
-% requires manual inputs 
-
-% currently coded for '.mgz' MRI files only 
-
-% KK, June 2022; updated- Oct, 2022
-
-patient_dir = strcat ('/Users/neelbazro/Desktop/he_db/input','/', patient_id); 
-patient_output_dir = strcat ('/Users/neelbazro/Desktop/he_db/output', '/', patient_id);
-
+% Specify patient input and output dirs
+patient_dir = strcat ('/path/to/ patient_id'); 
+patient_output_dir = strcat ('/Path/to/output_dir/patient_id');
+mkdir(patient_output_dir)
 cd (patient_dir)
 
-%% specify and read mri file from patient folder
+%% load and read mri file from patient folder
 PFMRI =dir ('*.mgz'); % change to '*.nii' if needed
 mri_file = PFMRI.name; 
 mri_orig = ft_read_mri(mri_file);
 
-%% detect and specify MEG file 
-
+%% load the MEG file 
 PFMEG= dir ('*.fif'); 
 
-
 % automatically detect headshape from .fif file
-
 headshape = ft_read_headshape(PFMEG(1).name); 
-
 
 % convert dimensions of headshape for further analysis
 headshape = ft_convert_units(headshape, 'mm');
 
 % check axis of coordinate system
-
 ft_determine_coordsys(mri_orig, 'interactive', 'no') % x-axis should be right
 ft_plot_headshape(headshape);
 cd (patient_output_dir)
@@ -40,7 +49,6 @@ savefig (gcf, 'headshape_orig.fig', 'compact');
 close all
 
 %% Re-align 
-
 cfg = [];
 cfg.method = 'headshape';
 cfg.headshape.interactive = 'yes';
@@ -77,13 +85,11 @@ cfg.coilaccuracy = 0;
 data = ft_preprocessing(cfg);
 
 % Resample data file to save memory space
-
 cfg = [];
 cfg.resamplefs = 500;
 data_resampled = ft_resampledata(cfg, data);
 
 %% compute data covariance window 
-
 cfg = [];
 cfg.channel = 'MEG';
 cfg.covariance = 'yes';
@@ -111,7 +117,7 @@ cfg.grad = data_resampled.grad;
 headmodel = ft_prepare_headmodel(cfg, brain_mesh);
 
 save ('headmodel')
-clear seg.mat
+clear seg
 
 %% construction of source model 
 cfg = [];
@@ -134,18 +140,3 @@ alpha 0.5 % make the anatomical MRI slices a bit transparent
 
 savefig (gcf, 'alignment.fig', 'compact');
 close all
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
