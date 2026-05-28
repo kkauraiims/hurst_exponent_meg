@@ -2,7 +2,7 @@
 
 This repository contains MATLAB/FieldTrip scripts for an end-to-end workflow to compute the Hurst exponent from MEG virtual channels.
 
-The workflow includes MRI–MEG co-registration, MEG preprocessing, head model and source model construction, LCMV beamforming, virtual electrode extraction, and Hurst exponent estimation.
+The workflow includes MRI–MEG co-registration, MEG preprocessing, head model and source model construction, LCMV beamforming, virtual electrode extraction, and Hurst Exponent estimation.
 
 Written and maintained by Caroline Witton and [Kirandeep Kaur](https://github.com/kkauraiims).
 
